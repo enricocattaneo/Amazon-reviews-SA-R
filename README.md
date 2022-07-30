@@ -7,7 +7,6 @@
 - [Project Overview](#projectoverview)
 - [Data Description](#datadescription)
 - [Technical Overview](#technicaloverview)
-- [Requirements](#requirements)
 - [Results](#results)
 
 ***
@@ -26,7 +25,7 @@ This analysis's main objective is to understand the meaning behind reviews' comm
 ## Data Description
 
 The scraped review data contains 300 observations, including the title, text, and related star ratings (from 1 to 5) of each book's review. 
-By conducting a preliminary EDA, we observe the number of reviews divided by star rating and the difference in the reviews' length between positive (>= 4 stars) and negative reviews (<4 stars).![rev_by_star](https://user-images.githubusercontent.com/80990030/181917797-d29e8ed0-fb3e-42a3-9e23-7ac7c4e7a73a.png)![nchar](https://user-images.githubusercontent.com/80990030/181917809-f5d72698-f582-4cb0-9f13-81ad236d5cda.png)
+By conducting a preliminary EDA, we observe the number of reviews divided by star rating.![rev_by_star](https://user-images.githubusercontent.com/80990030/181917797-d29e8ed0-fb3e-42a3-9e23-7ac7c4e7a73a.png) We also consider the difference in the reviews' length between positive (>= 4 stars) and negative reviews (<4 stars).![nchar](https://user-images.githubusercontent.com/80990030/181917809-f5d72698-f582-4cb0-9f13-81ad236d5cda.png)
 
 <a id='technicaloverview'></a>
 ## Technical Overview
@@ -41,22 +40,26 @@ The project has been divided into various steps which include:
 
 It is essential to keep in mind that all the choices made in this pre-processing and cleaning phase impact the final output of the analysis.
 
-* Clustering
-* Supervised Learning
-* Model Evaluation
-* Predictions on Test data
-* Submission to Kaggle and Scoring
+#### Dictionary-Based Sentiment Analysis 
 
-An explanation about each step and choice of algorithms, metrics has been given in the `Report.pdf`.
+In this analysis we use two different approaches: 
+* Tidytext approach.
+* Udpipe approach.
 
+With the Tidytext approach, we consider each word independently and separately from others. Instead, when using the Udpipe approach, we can also account for polarity negators and amplifiers positionally close to a term (the performance usually increases).
 
-<a id='requirements'></a>
-## Requirements
+For both approaches we also consider three different lexicons: 
+* BING (gives words a positive or negative sentiment).
+* AFINN (rates words with a value from -5 to +5).
+* NRC (labels  words  with  six  possible  sentiments  or  emotions). 
 
-All of the requirements are given in requirements.txt. To install Run: `pip install -r requirements.txt`
-
+The procedure for each of these lexicons is similar, but the results depend on the lexicon itself. With every specific lexicon, we can give a sentiment or value to (almost) each word. Then we compute the value of each review as an aggregation of the contained words' values/sentiment. We compare the sentiment distributions considering each lexicon and analyze every word's contribution to the sentiment using bar charts and word clouds. 
 
 <a id='results'></a>
 ## Results
 
-The results have been clearly documented in the Jupyter Notebook. Please refer [Arvato Project Workbook.ipynb](https://github.com/pranaymodukuru/Bertelsmann-Arvato-customer-segmentation/blob/master/Arvato%20Project%20Workbook.ipynb).
+The reviews are primarily positive, which we knew from the start. However, it is crucial to notice how different choices and approaches can bring different results. Moreover, such an analysis can be conducted from multiple and different perspectives. 
+The main result of our analysis was to highlight the similarities and differences that arise from the analysis choices, not only when considering the approach or lexicon but also in the pre-processing and cleaning phase.
+
+
+The analysis and resulting visualizations are in the R Notebook and HTML file. At the same time, `Report.pdf` contains comments and observations on the analysis and its results.
